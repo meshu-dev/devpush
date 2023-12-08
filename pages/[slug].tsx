@@ -45,7 +45,7 @@ export const getStaticPaths = (async () => {
   }
 }) satisfies GetStaticPaths
 
-export default ({ postData }: Props) => {
+const Slug = ({ postData }: Props) => {
   let postView: React.JSX.Element;
 
   if ((postData as Post[])?.length) {
@@ -62,3 +62,5 @@ export default ({ postData }: Props) => {
     </>
   )
 }
+
+export default Slug;

@@ -11,16 +11,21 @@ type Props = {
 const PostBlockList = ({ posts, totalPages }: Props) => {
   const postBlocks: React.JSX.Element[] = [];
 
-  for (const post of posts) {
-    postBlocks.push(<PostBlock post={ post } />);
+  if (posts.length > 0) {
+    for (const post of posts) {
+      postBlocks.push(<PostBlock post={ post } />);
+    }
+  
+    return (
+      <div id="post-list">
+        { postBlocks }
+        <Pagination totalPages={ totalPages } />
+      </div>
+    );
   }
-
   return (
-    <div id="post-list">
-      { postBlocks }
-      <Pagination totalPages={ totalPages } />
-    </div>
-  );
+    <div>No posts available.</div>
+  )
 }
 
 export default PostBlockList;

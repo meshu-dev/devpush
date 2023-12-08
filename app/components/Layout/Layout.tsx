@@ -1,5 +1,3 @@
-import { Html, Head, Main, NextScript } from 'next/document';
-import { ColorSchemeScript } from '@mantine/core';
 import { PropsWithChildren } from 'react';
 import Header from '@/app/components/Layout/Header';
 

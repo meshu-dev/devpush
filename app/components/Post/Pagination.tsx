@@ -10,12 +10,12 @@ const Pagination = ({ totalPages }: Props) => {
   if (totalPages > 1) {
     const paginationButtons: React.JSX.Element[] = [];
 
-    for (let i = 0; i< totalPages; i++) {
+    for (let i = 0; i < totalPages; i++) {
       const pageNum: number = i + 1;
       const url: string = pageNum == 1 ? '/' : `/${pageNum}`;
   
       paginationButtons.push(
-        <Link href={ url }>
+        <Link key={ `pagination-${i}` } href={ url }>
           <Button variant="default">
             { pageNum }
           </Button>

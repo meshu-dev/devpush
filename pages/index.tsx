@@ -15,7 +15,7 @@ export const getStaticProps = (async () => {
   return { props: { posts, totalPages } };
 }) satisfies GetStaticProps<Props>
 
-export default ({ posts, totalPages }: Props) => {
+const Index = ({ posts, totalPages }: Props) => {
   return (
     <>
       <Layout>
@@ -25,3 +25,5 @@ export default ({ posts, totalPages }: Props) => {
     </>
   )
 }
+
+export default Index;
