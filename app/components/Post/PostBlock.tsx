@@ -9,8 +9,6 @@ type Props = {
 
 const PostBlock = ({ post }: Props) => {
   let imgElement =  <Image
-                      h={ 250 }
-                      w={ 450 }
                       fit="cover"
                       src={ post.thumb?.sourceUrl }
                       fallbackSrc="https://placehold.co/450x250?text=Placeholder"
@@ -23,7 +21,9 @@ const PostBlock = ({ post }: Props) => {
         { imgElement }
       </Link>
       <div className="post-block-content">
-        <div className="post-block-title">{ post.title }</div>
+        <div className="post-block-title">
+          <Link href={ post.uri }>{ post.title }</Link>
+        </div>
         <div className="post-block-excerpt" dangerouslySetInnerHTML={{ __html: post.excerpt }}></div>
       </div>
     </div>

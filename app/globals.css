@@ -130,7 +130,8 @@ header h1 {
 
 .container {
   margin: auto;
-  width: 1440px;
+  max-width: 1440px;
+  padding: 0 40px;
 }
 
 #post-list {
@@ -140,11 +141,14 @@ header h1 {
 }
 
 .post-block-image {
+  width: 450px;
+  height: 250px;
   border-radius: 5px 0 0 5px;
 }
 
 .post-block {
   display: flex;
+  flex-direction: row;
   background-color: rgba(24, 24, 29, 1);
   border-radius: 5px;
 }
@@ -158,8 +162,15 @@ header h1 {
   margin-top: 20px;
 }
 
+.post-block-title a {
+  text-decoration: dotted;
+  text-decoration-line: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1px;
+}
+
 .post-block-excerpt {
-  margin-top: 20px;
+  margin: 20px 0 30px;
   line-height: 28px;
 }
 
@@ -167,4 +178,16 @@ header h1 {
   display: flex;
   margin-bottom: 40px;
   gap: 12px;
+}
+
+@media (max-width: 1024px) {
+  .post-block-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .post-block {
+    flex-direction: column;
+  }
 }
