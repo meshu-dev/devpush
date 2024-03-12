@@ -19,10 +19,14 @@ export interface PostPaginate {
 
 export interface PostUrl {
   id: number
-  url: string
+  slug: string
 }
 
 export interface Media {
   id: string
   sourceUrl: string
+}
+
+export type PostViewProps =  {
+  params: { slug: string }
 }
