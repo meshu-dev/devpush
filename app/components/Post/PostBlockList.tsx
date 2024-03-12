@@ -13,7 +13,7 @@ const PostBlockList = ({ posts, totalPages }: Props) => {
 
   if (posts.length > 0) {
     for (const post of posts) {
-      postBlocks.push(<PostBlock post={ post } />);
+      postBlocks.push(<PostBlock key={ post.id } post={ post } />);
     }
   
     return (

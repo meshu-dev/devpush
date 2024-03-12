@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header className="container">
       <h1 id="logo">
-        <Link href="/">RequireDev</Link>
+        <Link href="/">DevPush.io</Link>
       </h1>
     </header>
   )

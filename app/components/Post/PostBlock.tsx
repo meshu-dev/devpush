@@ -17,12 +17,12 @@ const PostBlock = ({ post }: Props) => {
 
   return (
     <div className="post-block">
-      <Link href={ post.uri }>
+      <Link href={ post.slug }>
         { imgElement }
       </Link>
       <div className="post-block-content">
         <div className="post-block-title">
-          <Link href={ post.uri }>{ post.title }</Link>
+          <Link href={ post.slug }>{ post.title }</Link>
         </div>
         <div className="post-block-excerpt" dangerouslySetInnerHTML={{ __html: post.excerpt }}></div>
       </div>

@@ -1,29 +1,31 @@
-import type { GetStaticProps } from 'next';
-import { getPaginatedPosts, getTotalsPosts } from '@/app/services/posts';
-import PostBlockList from '@/app/components/Post/PostBlockList';
-import { Post } from '@/app/types';
-import Layout from '@/app/components/Layout/Layout';
+import type { GetStaticProps } from 'next'
+import { getPostPaginate } from '@/app/services/posts'
+import PostBlockList from '@/app/components/Post/PostBlockList'
+import { PostPaginate } from '@/app/types'
+import Layout from '@/app/components/Layout/Layout'
+import { getTotalPages } from "@/utils/post"
 
 type Props = {
-  posts: Post[],
-  totalPages: number
+  postPaginate: PostPaginate
 }
 
 export const getStaticProps = (async () => {
-  const posts: Post[] = await getPaginatedPosts();
-  const totalPages: number = await getTotalsPosts();
-  return { props: { posts, totalPages } };
+  const postPaginate: PostPaginate = await getPostPaginate()
+  
+  return { props: { postPaginate } }
 }) satisfies GetStaticProps<Props>
 
-const Index = ({ posts, totalPages }: Props) => {
+const Index = ({ postPaginate }: Props) => {
   return (
     <>
       <Layout>
-        <div id="intro-msg">Tutorials to support PHP &amp; JavaScript development</div>
-        <PostBlockList posts={ posts } totalPages={ totalPages } />
+        <div id="intro-msg">Guides to support PHP &amp; JavaScript development</div>
+        <PostBlockList
+          posts={ postPaginate.data }
+          totalPages={ getTotalPages(postPaginate) } />
       </Layout>
     </>
   )
 }
 
-export default Index;
+export default Index

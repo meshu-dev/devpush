@@ -1,18 +1,21 @@
-import { getPostUris, getTotalsPosts } from '@/app/services/posts';
-import { PostUri } from '@/app/types';
+import { getPostUris, getPostPaginate } from '@/app/services/posts';
+import { PostPaginate, PostUrl } from '@/app/types';
+import { getTotalPages } from "@/utils/post"
 
-export const getPostListUrls = async (): Promise<string[]> => {
-  const totalPages: number = await getTotalsPosts();
-  let urls: string[] = [];
+export const getPostListPaths = async (): Promise<{ params: { page: string } }[]> => {
+  const postPaginate: PostPaginate = await getPostPaginate()
+  const totalPages: number = getTotalPages(postPaginate)
+
+  let paths = []
  
   for (let counter: number = 0; counter < totalPages; counter++) {
-    const nextPage: number = counter + 1;
+    const nextPage: number = counter + 1
 
     if (nextPage > 1) {
-      urls.push(nextPage.toString());
+      paths.push({ params: { page: nextPage.toString() } })
     }
   }
-  return urls;
+  return paths
 }
 
 export const getPostViewUrls = async (): Promise<string[]> => {
@@ -27,14 +30,14 @@ export const getPostViewUrls = async (): Promise<string[]> => {
 }
 
 export const getPostViewPaths = async () => {
-  const postListUrls: string[] = await getPostListUrls();
-  const postViewUrls: string[] = await getPostViewUrls();
-  const postUrls: string[]     = postListUrls.concat(postViewUrls);
+  const postListUrls: string[] = [];//await getPostListUrls()
+  const postViewUrls: string[] = await getPostViewUrls()
+  const postUrls: string[]     = postListUrls.concat(postViewUrls)
 
   let paths = [];
 
   for (const postUrl of postUrls) {
-    paths.push({ params: { slug: postUrl } });
+    paths.push({ params: { slug: postUrl } })
   }
-  return paths;
+  return paths
 }

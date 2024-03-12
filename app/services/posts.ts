@@ -1,146 +1,25 @@
-import { gql } from "@apollo/client";
-import { client } from '@/utils/apollo';
-import { Post, PostUri } from "@/app/types";
+import type { PostPaginate, Post } from "@/app/types"
 
-const setupFeaturedImage = (postData: any) => {
-  let post = { ...postData, selected: false }
+const apiUrl: string = process.env.NEXT_PUBLIC_DEVPUSH_API_URL ?? ''
 
-  if (postData.featuredImage?.node) {
-    post.thumb = postData.featuredImage?.node ?? null;
-    delete post.featuredImage;
-  }
-
-  return post;
-};
-
-export const getPostUrisOld = async (count: number = 100): Promise<PostUri[]> => {
-  const getPostsQuery = gql`
-    query PostKeysQuery($first: Int) {
-      posts(first: $first) {
-        nodes {
-          id
-          date
-          uri
-        }
-      }
-    }
-  `;
-
-  const response = await client.query({
-    query: getPostsQuery,
-    variables: { first: count }
-  });
-
-  return response?.data?.posts?.nodes;
+const getResponse = async (url: string) => {
+  const response = await fetch(url)
+  return await response.json()
 }
 
-export const getPostUris = async (count: number = 100): Promise<PostUri[]> => {
-  const getPostsQuery = gql`
-    query PostKeysQuery($first: Int) {
-      posts(first: $first) {
-        edges {
-          cursor
-          node {
-            id
-            date
-            uri
-          } 
-        }
-      }
-    }
-  `;
-
-  const response = await client.query({
-    query: getPostsQuery,
-    variables: { first: count }
-  });
-
-  return response?.data?.posts?.edges;
+const getData = async (url: string) => {
+  const result = await getResponse(url)
+  return result['data']
 }
 
-export const getPaginatedPosts = async (afterId: string | null = null): Promise<Post[]> => {
-  const pageLimit: number = Number(process.env.NEXT_PUBLIC_PAGE_LIMIT);
-
-  const getPostsQuery = gql`
-    query PaginatedPostsQuery($first: Int, $after: String) {
-      posts(first: $first, after: $after) {
-        pageInfo {
-          hasNextPage
-        }
-        nodes {
-          id
-          databaseId
-          title
-          excerpt
-          date
-          uri
-          featuredImage {
-            node {
-              id
-              sourceUrl
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const response = await client.query({
-    query: getPostsQuery,
-    variables: { first: pageLimit, after: afterId }
-  });
-
-  let posts = response?.data?.posts?.nodes;
-
-  //console.log('getPosts', posts);
-
-  posts = posts.map((post: any) => setupFeaturedImage(post));
-  return posts;
+export const getPostPaginate = (page: number = 1): Promise<PostPaginate> => {
+  return getResponse(`${apiUrl}/posts?page=${page}`)
 }
 
-export const getPostBySlug = async (slug: string): Promise<Post> => {
-  const getSinglePostQuery = gql`
-    query SinglePostBySlugQuery {
-      post(id: "${slug}", idType: SLUG) {
-        id
-        title
-        content
-        date
-        uri
-        featuredImage {
-          node {
-            id
-            sourceUrl
-          }
-        }
-      }
-    }
-  `;
-
-  const response = await client.query({ query: getSinglePostQuery });
-
-  let post = response?.data?.post;
-
-  //console.log('post', slug, response);
-
-  return setupFeaturedImage(post);
+export const getPostUrls = (): Promise<Post[]> => {
+  return getData(`${apiUrl}/posts/urls`)
 }
 
-export const findAfterIdForPage = async (page: number): Promise<string> => {
-  const postUris: PostUri[] = await getPostUris();
-  const pageLimit: number = Number(process.env.NEXT_PUBLIC_PAGE_LIMIT);
-  const postUriIndex: number = (pageLimit * (page - 1)) - 1;
-
-  console.log('postUriIndex', postUriIndex);
-
-  return postUris[postUriIndex].cursor;
-}
-
-export const getTotalsPosts = async () : Promise<number> => {
-  const postKeys: PostUri[] = await getPostUris();
-
-  const divsion: number = (postKeys.length / Number(process.env.NEXT_PUBLIC_PAGE_LIMIT));
-  const totalPages: number = Math.ceil(divsion);
-
-  return totalPages;
+export const getPost = (id: number): Promise<Post> => {
+  return getData(`${apiUrl}/posts/${id}`)
 }
