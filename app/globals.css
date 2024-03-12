@@ -226,4 +226,12 @@ figure.aligncenter {
   .post-block {
     flex-direction: column;
   }
+
+  .post-block-content {
+    padding: 0;
+  }
+
+  figure img {
+    max-width: 100%;
+  }
 }

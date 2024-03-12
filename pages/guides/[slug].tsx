@@ -1,28 +1,24 @@
 import type { GetStaticPaths, GetStaticProps, GetStaticPropsContext, PreviewData } from 'next'
-import { getPostBySlug, getPostPaginate } from '@/app/services/posts'
 import PostBlockList from '@/app/components/Post/PostBlockList'
 import { Post, PostPaginate, PostViewProps } from '@/app/types'
 import Layout from '@/app/components/Layout/Layout'
 import { applyCopyCodeClickEvents, getTotalPages } from "@/utils/post"
 import { ParsedUrlQuery } from 'querystring'
-import { getPostListPaths, getPostViewPaths } from '@/utils/staticPaths';
+import { getPostListPaths, getPostViewPaths } from '@/utils/staticPaths'
 import PostView from '@/app/components/Post/PostView'
 import { useEffect } from 'react'
+import { getGuideViewProps } from '@/utils/staticProps'
 
 type Props = {
   guideData: PostPaginate | Post
 }
 
 export const getStaticProps = (async (context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>) => {
-  let slug: String | undefined = context.params?.slug?.toString()
+  let slug: string = context.params?.slug?.toString() ?? ''
+  const guideData = await getGuideViewProps(slug)
   
-  if (isNaN(Number(slug))) {
-    const post: Post = await getPostBySlug(slug ? slug.toString() : '')
-    return { props: { guideData: post } }
-  } else {
-    const postPaginate: PostPaginate = await getPostPaginate(Number(slug))
-    return { props: { guideData: postPaginate } }
-  }
+  return { props: { guideData } }
+
 }) satisfies GetStaticProps<Props>
 
 export const getStaticPaths = (async () => {
