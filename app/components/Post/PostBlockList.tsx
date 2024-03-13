@@ -17,10 +17,13 @@ const PostBlockList = ({ posts, totalPages }: Props) => {
     }
   
     return (
-      <div id="post-list">
-        { postBlocks }
-        <Pagination totalPages={ totalPages } />
-      </div>
+      <>
+        <h1>Guides to support PHP &amp; JavaScript development</h1>
+        <div id="post-list">
+          { postBlocks }
+          <Pagination totalPages={ totalPages } />
+        </div>
+      </>
     );
   }
   return (

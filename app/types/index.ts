@@ -3,9 +3,10 @@ export interface Post {
   title: string
   excerpt: string
   content: string
-  date: Date
   slug: string
-  thumb: Media
+  thumbnail: string,
+  created_at: string,
+  updated_at: string
 }
 
 export interface PostPaginate {

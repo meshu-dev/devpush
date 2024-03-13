@@ -3,9 +3,11 @@ import Link from 'next/link'
 const Header = () => {
   return (
     <header className="container">
-      <h1 id="logo">
-        <Link href="/">DevPush.io</Link>
-      </h1>
+      <Link id="logo" href="/">DevPush.io</Link>
+      <nav>
+        <Link href="/">Home</Link>
+        <Link href="/contact">Contact</Link>
+      </nav>
     </header>
   )
 }

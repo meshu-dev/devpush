@@ -3,8 +3,6 @@ import type { PostPaginate, Post, PostUrl } from "@/app/types"
 const apiUrl: string = process.env.NEXT_PUBLIC_DEVPUSH_API_URL ?? ''
 
 const getResponse = async (url: string) => {
-  console.log('url', url)
-
   const response = await fetch(url)
   return await response.json()
 }
