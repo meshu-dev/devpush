@@ -103,6 +103,15 @@ a {
 ul {
   padding-left: 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.simpletoc-list ul {
+  margin: 8px 0 0 0;
+}
+
+.simpletoc-list li {
+  margin-bottom: 8px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -140,6 +149,26 @@ p {
   line-height: 25px;
 }
 
+.wp-block-table {
+  margin-bottom: 20px;
+}
+
+.wp-block-table table {
+  width: 100%;
+  border-spacing: 2px;
+  border-color: grey;
+  border-collapse: collapse;
+}
+
+.wp-block-table td {
+  border: 1px solid;
+  padding: 8px;
+}
+
+.wp-element-caption {
+  color: #636363;
+}
+
 #logo {
   font-size: 25px;
 }
@@ -149,6 +178,10 @@ h1 {
   padding: 30px 0 60px;
   font-size: 40px;
   font-weight: bolder;
+}
+
+#post-view h1 {
+  padding-bottom: 20px;
 }
 
 .container {
@@ -168,7 +201,6 @@ footer {
 #post-list {
   display: flex;
   flex-direction: column;
-  gap: 80px;
 }
 
 .post-block-image {
@@ -184,7 +216,7 @@ footer {
 }
 
 .post-block-content {
-  padding: 0 50px;
+  padding: 0;
 }
 
 .post-block-title {
@@ -219,14 +251,33 @@ figure img {
   max-width: 1000px;
 }
 
-#post-view h2,
 #post-view p,
-.wp-block-image {
-  margin-top: 20px;
+.wp-block-image,
+.wp-block-heading {
+  margin-bottom: 20px;
+}
+
+h3.wp-block-heading,
+h4.wp-block-heading {
+  text-decoration: underline;
+}
+
+#post-view p {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+#post-view img {
+  border-radius: 5px;
+}
+
+.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre {
+  border-radius: 5px !important;
 }
 
 #post-view-date {
-  margin: 20px 0;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 #post-view-date span {
@@ -239,7 +290,7 @@ figure.aligncenter {
 }
 
 .wp-block-kevinbatdorf-code-block-pro {
-  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #contact {

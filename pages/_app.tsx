@@ -4,8 +4,8 @@ import { ApolloProvider } from '@apollo/client/react'
 import { client } from '@/utils/apollo'
 
 import '@mantine/core/styles.css'
-import '@/app/globals.css'
 import '@/app/code-block-pro.css'
+import '@/app/globals.css'
 
 const theme = createTheme(
   {

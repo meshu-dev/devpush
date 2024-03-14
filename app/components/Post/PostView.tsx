@@ -7,8 +7,8 @@ type Props = {
 }
 
 const PostView = ({ post }: Props) => {
-  const isModified: boolean = post.created_at != post.updated_at
-  const postDate: string    = getPostDate(isModified ? post.updated_at : post.created_at)
+  const isModified: boolean = post.published_at != post.updated_at
+  const postDate: string    = getPostDate(isModified ? post.updated_at : post.published_at)
 
   return (
     <div id="post-view">

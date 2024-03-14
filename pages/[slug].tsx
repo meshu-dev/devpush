@@ -8,23 +8,22 @@ import { getPostListPaths, getPostViewPaths } from '@/utils/staticPaths'
 import PostView from '@/app/components/Post/PostView'
 import { useEffect } from 'react'
 import { getGuideViewProps } from '@/utils/staticProps'
+import { getPostBySlug } from '@/app/services/posts'
 
 type Props = {
-  guideData: PostPaginate | Post
+  post: Post
 }
 
 export const getStaticProps = (async (context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>) => {
   let slug: string = context.params?.slug?.toString() ?? ''
-  const guideData = await getGuideViewProps(slug)
+  const post: Post = await getPostBySlug(slug)
   
-  return { props: { guideData } }
+  return { props: { post } }
 
 }) satisfies GetStaticProps<Props>
 
 export const getStaticPaths = (async () => {
-  const listPaths: PostViewProps[] = await getPostListPaths()
-  const viewPaths: PostViewProps[] = await getPostViewPaths()
-  const paths: PostViewProps[]     = listPaths.concat(viewPaths); 
+  const paths: PostViewProps[] = await getPostViewPaths()
 
   return {
     paths,
@@ -32,27 +31,15 @@ export const getStaticPaths = (async () => {
   }
 }) satisfies GetStaticPaths
 
-const GuideView = ({ guideData }: Props) => {
-  let postView: React.JSX.Element
-
+const GuideView = ({ post }: Props) => {
   useEffect(() => {
     applyCopyCodeClickEvents()
   })
 
-  if ((guideData as PostPaginate)?.data) {
-    const postPaginate = guideData as PostPaginate
-
-    postView =  <PostBlockList
-                  posts={ postPaginate.data as Post[] }
-                  totalPages={ getTotalPages(postPaginate) } />
-  } else {
-    postView =  <PostView post={ guideData as Post } />
-  }
-
   return (
     <>
       <Layout>
-        { postView }
+        <PostView post={ post } />
       </Layout>
     </>
   )

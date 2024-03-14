@@ -5,7 +5,7 @@ export interface Post {
   content: string
   slug: string
   thumbnail: string,
-  created_at: string,
+  published_at: string,
   updated_at: string
 }
 
@@ -30,4 +30,9 @@ export interface Media {
 
 export type PostViewProps =  {
   params: { slug: string }
+}
+
+
+export type PostListProps =  {
+  params: { page: string }
 }
