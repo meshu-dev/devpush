@@ -1,13 +1,13 @@
 import React from "react";
 import { Post } from '@/app/types';
-import { getPostDate } from "@/utils/post";
+import { getPostDate, isPostUpdated } from "@/utils/post";
 
 type Props = {
   post: Post
 }
 
 const PostView = ({ post }: Props) => {
-  const isModified: boolean = post.published_at != post.updated_at
+  const isModified: boolean = isPostUpdated(post)
   const postDate: string    = getPostDate(isModified ? post.updated_at : post.published_at)
 
   return (
