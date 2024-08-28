@@ -1,6 +1,6 @@
 import type { Blog, PaginatedBlogList, Tag } from "@/types/blog"
 
-const devnudgeApiUrl: string = import.meta.env.PROD ? import.meta.env.DEVNUDGE_API_URL : import.meta.env.PUBLIC_DEVNUDGE_API_URL
+const devnudgeApiUrl: string = import.meta.env.PROD ? import.meta.env.HYPER_URL : import.meta.env.PUBLIC_HYPER_URL
 
 export const getSlugs = async (): Promise<string[]> => {
   const response: Response = await fetch(`${devnudgeApiUrl}/blogs/slugs`)
