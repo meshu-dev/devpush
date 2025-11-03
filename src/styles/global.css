@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl font-extrabold mt-5 mb-10;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold mb-6;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold mb-3;
+  }
+
+  p {
+    @apply mb-6;
+  }
+
+  ul {
+    @apply list-disc ml-6 mb-6;
+  }
+
+  ol {
+    @apply list-decimal ml-6 mb-6;
+  }
+
+  blockquote {
+    @apply border-l-4 pl-4 border-black;
+  }
+
+  .home-link {
+    @apply text-xl font-bold underline decoration-2 underline-offset-8 hover:text-sky-600 decoration-sky-600;
+  }
+
+  .link {
+    @apply text-sm font-bold hover:underline decoration-2 underline-offset-8 hover:text-sky-600 decoration-sky-600;
+  }
+
+  .button {
+    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5;
+  }
+
+  .field {
+    @apply border p-2 rounded-md text-zinc-700 border-zinc-400 min-w-xs;
+  }
+
+  .invalid-field {
+    @apply border p-2 rounded-md border-red-400 min-w-xs;
+  }
+
+  .button {
+    @apply border bg-blue-600 text-blue-50 p-2 rounded-md cursor-pointer; 
+  }
+
+  .message-success {
+    @apply p-2 rounded-md bg-lime-500 text-lime-50 max-w-xs;
+  }
+
+  .message-error {
+    @apply p-2 rounded-md bg-red-500 text-red-50 max-w-xs;
+  }
+
+  pre {
+    @apply mb-6 overflow-auto bg-gray-100;
+  }
+
+  .wp-block-image {
+    @apply flex justify-center;
+  }
+
+  .hljs {
+    @apply block p-4 bg-gray-100 overflow-x-scroll;
+  }
+
+  .nord {
+    @apply p-5;
+  }
+
+  .list-item {
+    @apply before:content-['➤'] before:pr-4;
+  }
+}
+
+.layout-width {
+  max-width: var(--container-3xl);
+}

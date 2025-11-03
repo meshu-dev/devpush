@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro'
+import NewsletterForm from '../components/NewsletterForm.vue'
+---
+
+<Layout title="FREE Guides">
+  <h1>FREE Guides</h1>
+  <p class="mb-8">Here is a list of guides designed to help 
+  people who are beginners to website development.</p>
+  <ul class="list-none flex flex-col gap-y-6 ml-4 mb-12">
+    <li class="list-item">HTML - Crash Course</li>
+    <li class="list-item">Web Developer Roadmap</li>
+    <li class="list-item">Web Developer Software Setup</li>
+    <li class="list-item">
+      PHP - Crash Course <span class="font-bold italic">(Coming soon)</span>
+    </li>
+  </ul>
+  <p>To get the free guides sign up to my newsletter:</p>
+  <NewsletterForm client:load />
+</Layout>

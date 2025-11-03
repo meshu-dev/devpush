@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro'
+import NewsletterForm from '../components/NewsletterForm.vue'
+---
+
+<Layout title="FREE Newsletter">
+  <h1>Newsletter</h1>
+  <p>Keep up to date with everything that I do.</p>
+  <NewsletterForm client:load />
+</Layout>
