@@ -37,7 +37,7 @@
         formData.value.email = ''
       }
     } catch (error) {
-      console.error("Error:", error)
+      console.error("Error", error)
       //formErrors.value.push(error)
     }
   }
